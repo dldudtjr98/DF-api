@@ -1,0 +1,12 @@
+fastapi
+uvicorn[standard]
+pytest
+ffmpeg-python
+psycopg2
+python-multipart
+aiofiles
+boto3
+requests
+sqlalchemy
+alembic
+httpx

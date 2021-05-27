@@ -1,0 +1,19 @@
+FROM python:3.7
+
+ENV PYTHONUNBUFFERED 1
+
+EXPOSE 15000
+
+RUN mkdir /config
+COPY config/app /config/
+
+RUN pip install --no-cache-dir -r /config/requirements_local.txt
+
+RUN mkdir /backend
+COPY backend /backend/
+WORKDIR /backend
+
+ENV PYTHONPATH=/backend
+
+RUN chmod +x /config/start-server-local.sh
+CMD ["/bin/bash", "/config/start-server-local.sh"]

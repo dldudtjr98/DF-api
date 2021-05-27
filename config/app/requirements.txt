@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+pytest
+psycopg2
+python-multipart
+aiofiles
+boto3
+requests
+sqlalchemy
