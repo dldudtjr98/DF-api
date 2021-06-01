@@ -1,4 +1,3 @@
-import json
 from typing import List
 
 from fastapi.encoders import jsonable_encoder
@@ -11,6 +10,7 @@ from httpx import AsyncClient
 from fastapi import FastAPI, status
 from api.api import api_router
 from core.config import settings
+from modules import PyObjectId, if_none_insert, make_api_url, request_to_api_server
 
 
 app = FastAPI()
@@ -20,22 +20,6 @@ db_client = AsyncIOMotorClient(settings.DB_CONNECT_PATH)
 db = db_client['base_info']
 job = db['job']
 server = db['server']
-
-
-class PyObjectId(ObjectId):
-    @classmethod
-    def __get_validators__(cls):
-        yield cls.validate
-
-    @classmethod
-    def validate(cls, v):
-        if not ObjectId.is_valid(v):
-            raise ValueError("Invalid objectid")
-        return ObjectId(v)
-
-    @classmethod
-    def __modify_schema__(cls, field_schema):
-        field_schema.update(type="string")
 
 
 class JobModel(BaseModel):
@@ -57,23 +41,6 @@ class ServerModel(BaseModel):
         json_encoders = {ObjectId: str}
 
 
-async def request_to_api_server(url):
-    resp = await client.get(url)
-    return json.loads(resp.text)
-
-
-def make_url(chunk_url):
-    url = f'{settings.DF_API_SERVER}{chunk_url}?apikey={settings.DF_API_KEY}'
-    return url
-
-
-async def if_none_insert(table, data, key):
-    for frag in data:
-        doc_key = await table.find_one({key: frag[key]})
-        if doc_key is None:
-            await table.insert_one(frag)
-
-
 @app.get("/healthcheck", status_code=status.HTTP_200_OK)
 def index():
     return {"message": "I'm health"}
@@ -81,7 +48,7 @@ def index():
 
 @app.post("/server", status_code=status.HTTP_201_CREATED)
 async def create_server():
-    url = make_url('servers')
+    url = make_api_url('servers')
     data = await request_to_api_server(url)
     print(data)
     data = jsonable_encoder(data["rows"])
@@ -97,7 +64,7 @@ async def get_server():
 
 @app.post("/job", status_code=status.HTTP_201_CREATED)
 async def create_job():
-    url = make_url('jobs')
+    url = make_api_url('jobs')
     data = await request_to_api_server(url)
     print(data)
     for base_job in data["rows"]:  # 귀검사(남), 귀검사(여), ...

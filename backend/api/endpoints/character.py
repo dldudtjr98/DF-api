@@ -9,6 +9,7 @@ from fastapi import (
     APIRouter, status
 )
 from core.config import settings
+from modules import make_api_url, make_img_url, request_to_api_server
 
 
 router = APIRouter()
@@ -16,22 +17,6 @@ client = AsyncClient()
 db_client = AsyncIOMotorClient(settings.DB_CONNECT_PATH)
 
 db = db_client['character']
-
-
-async def request_to_api_server(url, params={}):
-    params['apikey'] = settings.DF_API_KEY
-    resp = await client.get(url, params=params)
-    return json.loads(resp.text)
-
-
-def make_api_url(chunk_url):
-    url = f'{settings.DF_API_SERVER}{chunk_url}'
-    return url
-
-
-def make_img_url(chunk_url):
-    url = f'{settings.DF_IMG_SERVER}{chunk_url}'
-    return url
 
 
 class Search(BaseModel):
