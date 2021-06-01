@@ -15,9 +15,7 @@ from core.config import settings
 
 app = FastAPI()
 client = AsyncClient()
-
-MONGO_DETAILS = f"mongodb://{settings.DB_USERNAME}:{settings.DB_PASSWORD}@{settings.DB_HOST}"
-db_client = AsyncIOMotorClient(MONGO_DETAILS)
+db_client = AsyncIOMotorClient(settings.DB_CONNECT_PATH)
 
 db = db_client['base_info']
 job = db['job']

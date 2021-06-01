@@ -3,6 +3,7 @@ from typing import Optional
 
 from pydantic.main import BaseModel
 from httpx import AsyncClient
+from motor.motor_asyncio import AsyncIOMotorClient
 
 from fastapi import (
     APIRouter, status
@@ -12,6 +13,9 @@ from core.config import settings
 
 router = APIRouter()
 client = AsyncClient()
+db_client = AsyncIOMotorClient(settings.DB_CONNECT_PATH)
+
+db = db_client['character']
 
 
 async def request_to_api_server(url, params={}):
