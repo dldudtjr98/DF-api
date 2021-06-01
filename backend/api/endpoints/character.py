@@ -1,13 +1,10 @@
-import json
 from typing import Optional
 
 from pydantic.main import BaseModel
 from httpx import AsyncClient
 from motor.motor_asyncio import AsyncIOMotorClient
+from fastapi import APIRouter, status
 
-from fastapi import (
-    APIRouter, status
-)
 from core.config import settings
 from modules import make_api_url, make_img_url, request_to_api_server
 

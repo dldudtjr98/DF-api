@@ -20,11 +20,6 @@ job = db['job']
 server = db['server']
 
 
-@router.get("/healthcheck", status_code=status.HTTP_200_OK)
-def index():
-    return {"message": "I'm health"}
-
-
 @router.post("/server", status_code=status.HTTP_201_CREATED)
 async def create_server():
     url = make_api_url('servers')
