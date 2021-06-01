@@ -1,26 +1,16 @@
 # File structure version
 version: '3'
-
-volumes:
-    db-volume: {}
     
 services:
-    psqldb:
+    mongodb:
+        image: mongo
         restart: always
-        image: postgres
-        volumes:
-            - db-volume:/var/lib/postgresql/data
-        environment: 
-            - POSTGRES_DB=pondun
-            - POSTGRES_USER=pondun
-            - POSTGRES_PASSWORD=pondun
-            - POSTGRES_HOST_AUTH_METHOD=trust
-            - POSTGRES_INITDB_ARGS=--encoding=UTF-8
-        expose:
-            - "55432"
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: mongo_root
+            MONGO_INITDB_DATABASE: pondun
         ports:
-            - "55432:55432"
-        command: -p 55432
+            - "27017:27017"
     app:
         build:
             context: .
@@ -28,8 +18,8 @@ services:
         volumes:
             - ./backend:/backend
         ports:
-            - "15000:15000"
+            - "16000:16000"
         depends_on: 
-            - psqldb
+            - mongodb
 
     
