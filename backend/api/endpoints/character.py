@@ -76,7 +76,7 @@ async def search_skill_detail_info(job_id, skill_id):
 
 
 async def job_info():
-    url = make_api_url(f'jobs')
+    url = make_api_url('jobs')
     data = await request_to_api_server(url)
     return data
 
