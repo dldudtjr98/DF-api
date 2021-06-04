@@ -7,9 +7,11 @@ from modules import PyObjectId
 
 class JobModel(BaseModel):
     id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
-    jobId: str = Field(...)
-    jobName: str = Field(...)
-    advance: List[dict] = []
+    baseId: str = Field(...)
+    baseName: str = Field(...)
+    advancedId: str = Field(...)
+    advancedName: str = Field(...)
+    criticalCategory: List[str] = []
 
     class Config:
         json_encoders = {ObjectId: str}

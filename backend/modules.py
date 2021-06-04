@@ -39,7 +39,7 @@ def make_img_url(chunk_url):
     return url
 
 
-async def if_none_insert(table, data, key):
+async def if_none_insert_many(table, data, key):
     for frag in data:
         doc_key = await table.find_one({key: frag[key]})
         if doc_key is None:

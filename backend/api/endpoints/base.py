@@ -8,7 +8,8 @@ from motor.motor_asyncio import AsyncIOMotorClient
 
 from core.config import settings
 from api.models.base.schemas import JobModel, ServerModel
-from modules import if_none_insert, make_api_url, request_to_api_server
+from api.endpoints.modules.base import insert_data
+from modules import if_none_insert_many, make_api_url, request_to_api_server
 
 
 router = APIRouter()
@@ -24,9 +25,8 @@ server = db['server']
 async def create_server():
     url = make_api_url('servers')
     data = await request_to_api_server(url)
-    print(data)
     data = jsonable_encoder(data["rows"])
-    await if_none_insert(server, data, 'serverName')
+    await if_none_insert_many(server, data, 'serverName')
     return {"data": 'ok'}
 
 
@@ -40,17 +40,13 @@ async def get_server():
 async def create_job():
     url = make_api_url('jobs')
     data = await request_to_api_server(url)
-    print(data)
     for base_job in data["rows"]:  # 귀검사(남), 귀검사(여), ...
-        for index, adv_job in enumerate(base_job["rows"]):  # 웨펀마스터, 소울브링어, ...
+        for adv_job in base_job["rows"]:  # 웨펀마스터, 소울브링어, ...
             while "next" in adv_job:
                 final = adv_job["next"]
                 adv_job = adv_job["next"]
-            base_job["rows"][index] = final
-        base_job["advance"] = base_job.pop("rows")
-    data = jsonable_encoder(data["rows"])
-    await if_none_insert(job, data, 'jobName')
-    return {"data": 'ok'}
+            await insert_data(job, base_job, final)
+    return {"data": data}
 
 
 @router.get("/job", status_code=status.HTTP_200_OK, response_model=List[JobModel])

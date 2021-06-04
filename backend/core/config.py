@@ -224,7 +224,7 @@ class Settings(BaseSettings):
         {
             "baseId": "986c2b3d72ee0e4a0b7fcfbe786d4e02",  # 총검사
             "advancedId": [
-                pass
+                "c9b492038ee3ca8d27d7004cf58d59f3"
             ]
         },
         {
@@ -234,5 +234,6 @@ class Settings(BaseSettings):
             ]
         }
     ]
+
 
 settings = Settings()

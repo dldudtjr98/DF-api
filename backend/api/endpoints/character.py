@@ -1,4 +1,5 @@
 from typing import Optional
+import pprint
 
 from pydantic.main import BaseModel
 from httpx import AsyncClient
@@ -14,6 +15,9 @@ client = AsyncClient()
 db_client = AsyncIOMotorClient(settings.DB_CONNECT_PATH)
 
 db = db_client['character']
+base_db = db_client['base_info']
+
+job = base_db['job']
 
 
 class Search(BaseModel):
@@ -84,14 +88,35 @@ async def search_status_info(server, char_id):
     return data
 
 
+async def get_crit(request):
+    status_data = await search_status_info(request.serverId, request.characterId)
+    try:
+        myjob = await job.find_one(
+            {"baseId": status_data["jobId"], "advancedId": status_data["jobGrowId"]},
+            {"criticalCategory": 1}
+        )
+    except TypeError as e:
+        print(e)
+    physic = [status for status in status_data["status"] if status["name"] == "물리 크리티컬"][0]["value"]
+    magic = [status for status in status_data["status"] if status["name"] == "마법 크리티컬"][0]["value"]
+
+    if len(myjob["criticalCategory"]) == 1:
+        if myjob["criticalCategory"][0] == "physic":
+            return physic
+        else:
+            return magic
+    else:
+        return max(physic, magic)
+
+
 @router.get("/search/detail", status_code=status.HTTP_200_OK)
 async def search_detail_user(request: SearchDetail):
     basic_data = await search_basic_info(request.serverId, request.characterId)
     equip_data = await search_equip_info(request.serverId, request.characterId)
     skill_data = await search_skill_info(request.serverId, request.characterId)
     skill_data = await search_skill_info(request.serverId, request.characterId)
-    status_data = await search_status_info(request.serverId, request.characterId)
-    critical = [status for status in status_data["status"] if status["name"] == "물리 크리티컬"][0]["value"]
+    critical = await get_crit(request)
+
     detail_skill_data = {}
     for active in skill_data["skill"]["style"]["active"]:
         if active["skillId"] in settings.CRIT_ACTIVE:
@@ -102,5 +127,5 @@ async def search_detail_user(request: SearchDetail):
         "equip_data": equip_data,
         "skill_data": skill_data,
         "detail_skill_data": detail_skill_data,
-        "status_data": critical
+        "critical": critical
     }
