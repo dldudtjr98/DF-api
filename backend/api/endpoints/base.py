@@ -7,7 +7,7 @@ from fastapi.routing import APIRouter
 from motor.motor_asyncio import AsyncIOMotorClient
 
 from core.config import settings
-from api.models.base.schemas import JobModel, ServerModel
+from api.models.base.schemas import JobModel, ServerModel, SkillSearch, SkillSearchDetail
 from api.endpoints.modules.base import insert_data
 from modules import if_none_insert_many, make_api_url, request_to_api_server
 
@@ -53,3 +53,20 @@ async def create_job():
 async def get_job():
     jobs = await job.find().to_list(100)
     return jobs
+
+
+@router.get("/skill", status_code=status.HTTP_200_OK)
+async def get_skill(request: SkillSearch):
+    params = {
+        "jobGrowId": request.jobGrowId,
+    }
+    url = make_api_url(f'skills/{request.jobId}')
+    data = await request_to_api_server(url, params)
+    return {"data": data}
+
+
+@router.get("/skill/detail", status_code=status.HTTP_200_OK)
+async def get_skill_detail(request: SkillSearchDetail):
+    url = make_api_url(f'skills/{request.jobId}/{request.skillId}')
+    data = await request_to_api_server(url)
+    return {"data": data}

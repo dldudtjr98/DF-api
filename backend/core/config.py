@@ -234,6 +234,64 @@ class Settings(BaseSettings):
             ]
         }
     ]
+    # skill 첫번째 = 초기값, 두번째 = *n 크리티컬
+    CRIT_SKILL_ACTIVE: list = [
+        {
+            "jobId": {  # 웨펀마스터
+                "baseId": "41f1cdc2ff58bb5fdc287be0db2a8df3",
+                "advancedId": "37495b941da3b1661bc900e68ef3b2c6"
+            },
+            "skillId": {
+                "762c4e6d030eaf0abbfe1fec2b298574": [5, 1],  # 오버드라이브
+                "5806440d21e7546d50007a5ba11f8024": [4, 1]   # 류심 강
+            }
+        },
+        {
+            "jobId": {  # 버서커
+                "baseId": "41f1cdc2ff58bb5fdc287be0db2a8df3",
+                "advancedId": "6d459bc74ba73ee4fe5cdc4655400193"
+            },
+            "skillId": {
+                "762c4e6d030eaf0abbfe1fec2b298574": [2.4, 0.6],  # 선혈의 추억
+            }
+        },
+        {
+            "jobId": {  # 아수라
+                "baseId": "41f1cdc2ff58bb5fdc287be0db2a8df3",
+                "advancedId": "c9b492038ee3ca8d27d7004cf58d59f3"
+            },
+            "skillId": {
+                "762c4e6d030eaf0abbfe1fec2b298574": [10, 0.5],  # 살의의 파동
+            }
+        },
+        {
+            "jobId": {  # 소드마스터
+                "baseId": "1645c45aabb008c98406b3a16447040d",
+                "advancedId": "37495b941da3b1661bc900e68ef3b2c6"
+            },
+            "skillId": {
+                "762c4e6d030eaf0abbfe1fec2b298574": [0, 2],  # 신검합일
+            }
+        },
+        {
+            "jobId": {  # 스트리트파이터 (여)
+                "baseId": "a7a059ebe9e6054c0644b40ef316d6e9",
+                "advancedId": "6d459bc74ba73ee4fe5cdc4655400193"
+            },
+            "skillId": {
+                "762c4e6d030eaf0abbfe1fec2b298574": [8, 2],  # 용독술
+            }
+        },
+        {
+            "jobId": {  # 레인저 (남)
+                "baseId": "afdf3b989339de478e85b614d274d1ef",
+                "advancedId": "37495b941da3b1661bc900e68ef3b2c6"
+            },
+            "skillId": {
+                "762c4e6d030eaf0abbfe1fec2b298574": [0.6, 1],  # 죽음의 표식
+            }
+        },
+    ]
 
 
 settings = Settings()

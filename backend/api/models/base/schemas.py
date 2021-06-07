@@ -24,3 +24,13 @@ class ServerModel(BaseModel):
 
     class Config:
         json_encoders = {ObjectId: str}
+
+
+class SkillSearch(BaseModel):
+    jobId: str
+    jobGrowId: str
+
+
+class SkillSearchDetail(BaseModel):
+    jobId: str
+    skillId: str

@@ -88,6 +88,12 @@ async def search_status_info(server, char_id):
     return data
 
 
+async def search_skill_enforce_info(server, char_id, category):
+    url = make_api_url(f'servers/{server}/characters/{char_id}/skill/buff/equip/{category}')
+    data = await request_to_api_server(url)
+    return data
+
+
 async def get_crit(request):
     status_data = await search_status_info(request.serverId, request.characterId)
     try:
@@ -114,7 +120,7 @@ async def search_detail_user(request: SearchDetail):
     basic_data = await search_basic_info(request.serverId, request.characterId)
     equip_data = await search_equip_info(request.serverId, request.characterId)
     skill_data = await search_skill_info(request.serverId, request.characterId)
-    skill_data = await search_skill_info(request.serverId, request.characterId)
+    skill_enforce_equip_data = await search_skill_enforce_info(request.serverId, request.characterId, 'equipment')
     critical = await get_crit(request)
 
     detail_skill_data = {}
@@ -127,5 +133,6 @@ async def search_detail_user(request: SearchDetail):
         "equip_data": equip_data,
         "skill_data": skill_data,
         "detail_skill_data": detail_skill_data,
+        "skill_enforce_equip_data": skill_enforce_equip_data,
         "critical": critical
     }
