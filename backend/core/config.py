@@ -234,7 +234,7 @@ class Settings(BaseSettings):
             ]
         }
     ]
-    # skill 첫번째 = 초기값, 두번째 = *n 크리티컬
+    # skill 첫번째 = 1레벨 초기값, 두번째 = *n 크리티컬
     CRIT_SKILL_ACTIVE: list = [
         {
             "jobId": {  # 웨펀마스터
@@ -242,8 +242,8 @@ class Settings(BaseSettings):
                 "advancedId": "37495b941da3b1661bc900e68ef3b2c6"
             },
             "skillId": {
-                "762c4e6d030eaf0abbfe1fec2b298574": [5, 1],  # 오버드라이브
-                "5806440d21e7546d50007a5ba11f8024": [4, 1]   # 류심 강
+                "762c4e6d030eaf0abbfe1fec2b298574": [6, 1],  # 오버드라이브
+                "5806440d21e7546d50007a5ba11f8024": [5, 1]   # 류심 강
             }
         },
         {
@@ -252,7 +252,7 @@ class Settings(BaseSettings):
                 "advancedId": "6d459bc74ba73ee4fe5cdc4655400193"
             },
             "skillId": {
-                "762c4e6d030eaf0abbfe1fec2b298574": [2.4, 0.6],  # 선혈의 추억
+                "dbf8b30c7057032af0d68fcfa289fdae": [3, 0.6],  # 선혈의 추억
             }
         },
         {
@@ -261,7 +261,7 @@ class Settings(BaseSettings):
                 "advancedId": "c9b492038ee3ca8d27d7004cf58d59f3"
             },
             "skillId": {
-                "762c4e6d030eaf0abbfe1fec2b298574": [10, 0.5],  # 살의의 파동
+                "d0cdaca82892e54097f22a1f60817048": [10.5, 0.5],  # 살의의 파동
             }
         },
         {
@@ -270,7 +270,7 @@ class Settings(BaseSettings):
                 "advancedId": "37495b941da3b1661bc900e68ef3b2c6"
             },
             "skillId": {
-                "762c4e6d030eaf0abbfe1fec2b298574": [0, 2],  # 신검합일
+                "8c2379737c5acc935c1731f67f607655": [2, 2],  # 신검합일
             }
         },
         {
@@ -279,7 +279,7 @@ class Settings(BaseSettings):
                 "advancedId": "6d459bc74ba73ee4fe5cdc4655400193"
             },
             "skillId": {
-                "762c4e6d030eaf0abbfe1fec2b298574": [8, 2],  # 용독술
+                "1803b6a67047cafb9e289b4f33cc507b": [10, 2],  # 용독술
             }
         },
         {
@@ -288,9 +288,45 @@ class Settings(BaseSettings):
                 "advancedId": "37495b941da3b1661bc900e68ef3b2c6"
             },
             "skillId": {
-                "762c4e6d030eaf0abbfe1fec2b298574": [0.6, 1],  # 죽음의 표식
+                "b163d099c8cc27fdb6fd3639c2ee6df9": [1.6, 1],  # 죽음의 표식
             }
         },
+        {
+            "jobId": {  # 런처 (남)
+                "baseId": "afdf3b989339de478e85b614d274d1ef",
+                "advancedId": "618326026de1a1f1cfba5dbd0b8396e7"
+            },
+            "skillId": {
+                "6e33d47e6622ce03b6defdd912140270": [0.8, 1.6],  # 스펙트럴 서치 아이
+            }
+        },
+        {
+            "jobId": {  # 스핏파이어 (남)
+                "baseId": "afdf3b989339de478e85b614d274d1ef",
+                "advancedId": "c9b492038ee3ca8d27d7004cf58d59f3"
+            },
+            "skillId": {
+                "c61f5a010370101402b05b21916c2071": [10, 0],  # 섬광류탄
+            }
+        },
+        {
+            "jobId": {  # 스핏파이어 (여)
+                "baseId": "944b9aab492c15a8474f96947ceeb9e4",
+                "advancedId": "c9b492038ee3ca8d27d7004cf58d59f3"
+            },
+            "skillId": {
+                "c61f5a010370101402b05b21916c2071": [10, 0],  # 섬광류탄
+            }
+        },
+        {
+            "jobId": {  # 디멘션워커 (남)
+                "baseId": "a5ccbaf5538981c6ef99b236c0a60b73",
+                "advancedId": "92da05ec93fb43406e193ffb9a2a629b"
+            },
+            "skillId": {
+                "2a0a39184de92acf1c1375e00b77404c": [10, 0],  # 운명왜곡
+            }
+        }
     ]
 
 
