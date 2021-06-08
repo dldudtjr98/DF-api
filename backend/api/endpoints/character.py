@@ -150,8 +150,9 @@ async def get_crit(request):
 
 @router.get("/search/detail", status_code=status.HTTP_200_OK)
 async def search_detail_user(request: SearchDetail):
+    message = "100% 크리티컬입니다."
     basic_data = await search_basic_info(request.serverId, request.characterId)
-    equip_data = await search_equip_info(request.serverId, request.characterId)
+    # equip_data = await search_equip_info(request.serverId, request.characterId)
     skill_data = await search_skill_info(request.serverId, request.characterId)
     skill_enforce_equip_data = await search_skill_enforce_info(request.serverId, request.characterId, 'equipment')
     critical = await get_crit(request)
@@ -160,17 +161,10 @@ async def search_detail_user(request: SearchDetail):
     crit_skill = get_character_critical_skill(basic_data["jobId"], basic_data["jobGrowId"])
     add_critical = calc_add_critical(crit_skill, buff_skill, skill_data)
     critical += add_critical
-
-    detail_skill_data = {}
-    for active in skill_data["skill"]["style"]["active"]:
-        if active["skillId"] in settings.CRIT_ACTIVE:
-            detail_skill_data = await search_skill_detail_info(basic_data["jobId"], active["skillId"])
+    if critical < 100:
+        message = f"100% 크리티컬이 아닙니다. ({critical})"
 
     return {
         "basic_data": basic_data,
-        "equip_data": equip_data,
-        "skill_data": skill_data,
-        "detail_skill_data": detail_skill_data,
-        "skill_enforce_equip_data": skill_enforce_equip_data,
-        "critical": critical
+        "message": message
     }
