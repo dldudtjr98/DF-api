@@ -108,7 +108,7 @@ def calc_skill_critical(crit_skill, skill_id, buff_skill_lv):
     return add_critical
 
 
-def calc_add_critical(crit_skill, buff_skill, skill_data):
+def calc_all_skill_critical(crit_skill, buff_skill, skill_data):
     buff_skill_critical = 0
     normal_skill_active_critical = 0
     normal_skill_passive_critical = 0
@@ -152,19 +152,20 @@ async def get_crit(request):
 async def search_detail_user(request: SearchDetail):
     message = "100% 크리티컬입니다."
     basic_data = await search_basic_info(request.serverId, request.characterId)
-    # equip_data = await search_equip_info(request.serverId, request.characterId)
+    equip_data = await search_equip_info(request.serverId, request.characterId)
     skill_data = await search_skill_info(request.serverId, request.characterId)
     skill_enforce_equip_data = await search_skill_enforce_info(request.serverId, request.characterId, 'equipment')
     critical = await get_crit(request)
 
     buff_skill = skill_enforce_equip_data["skill"]["buff"]["skillInfo"]
     crit_skill = get_character_critical_skill(basic_data["jobId"], basic_data["jobGrowId"])
-    add_critical = calc_add_critical(crit_skill, buff_skill, skill_data)
-    critical += add_critical
+    add_skill_critical = calc_all_skill_critical(crit_skill, buff_skill, skill_data)
+    critical += add_skill_critical
     if critical < 100:
         message = f"100% 크리티컬이 아닙니다. ({critical})"
 
     return {
         "basic_data": basic_data,
+        "equip_data": equip_data,
         "message": message
     }

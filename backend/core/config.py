@@ -12,7 +12,6 @@ class Settings(BaseSettings):
     DF_API_SERVER: str = os.getenv("DF_API_SERVER", "https://api.neople.co.kr/df/")
     DF_IMG_SERVER: str = os.getenv("DF_IMG_SERVER", "https://img-api.neople.co.kr/df/")
     MAX_LEV: int = 100
-    CRIT_ACTIVE: list = ["92360eab6e1f378902018eca681ac629"]
     CRIT_CATEGORY_PHYSIC: list = [
         {
             "baseId": "41f1cdc2ff58bb5fdc287be0db2a8df3",  # 귀검사(남)
@@ -329,8 +328,8 @@ class Settings(BaseSettings):
         },
         {
             "jobId": {  # 엘레멘탈마스터
-                "jobId": "3909d0b188e9c95311399f776e331da5",
-                "jobGrowId": "37495b941da3b1661bc900e68ef3b2c6"
+                "baseId": "3909d0b188e9c95311399f776e331da5",
+                "advancedId": "37495b941da3b1661bc900e68ef3b2c6"
             },
             "skillId": {
                 "bb34e8854a93fd250347a1c64119f7ab": [30, 2],  # 초월의 룬
@@ -338,8 +337,8 @@ class Settings(BaseSettings):
         },
         {
             "jobId": {  # 인파이터
-                "jobId": "f6a4ad30555b99b499c07835f87ce522",
-                "jobGrowId": "618326026de1a1f1cfba5dbd0b8396e7"
+                "baseId": "f6a4ad30555b99b499c07835f87ce522",
+                "advancedId": "618326026de1a1f1cfba5dbd0b8396e7"
             },
             "skillId": {
                 "8f73f243041c2d27739fe7696f02bf9b": [1.5, 1.5],  # 윌드라이버
@@ -347,8 +346,8 @@ class Settings(BaseSettings):
         },
         {
             "jobId": {  # 퇴마사
-                "jobId": "f6a4ad30555b99b499c07835f87ce522",
-                "jobGrowId": "6d459bc74ba73ee4fe5cdc4655400193"
+                "baseId": "f6a4ad30555b99b499c07835f87ce522",
+                "advancedId": "6d459bc74ba73ee4fe5cdc4655400193"
             },
             "skillId": {
                 "f6a4ad30555b99b499c07835f87ce522": [10, 2],  # 신선의 경지
@@ -356,8 +355,8 @@ class Settings(BaseSettings):
         },
         {
             "jobId": {  # 이단심판관
-                "jobId": "0c1b401bb09241570d364420b3ba3fd7",
-                "jobGrowId": "618326026de1a1f1cfba5dbd0b8396e7"
+                "baseId": "0c1b401bb09241570d364420b3ba3fd7",
+                "advancedId": "618326026de1a1f1cfba5dbd0b8396e7"
             },
             "skillId": {
                 "e49e57b2e8fbeceb0a2c56a0c63fe6c5": [1, 1],  # 광적인 믿음
@@ -365,8 +364,8 @@ class Settings(BaseSettings):
         },
         {
             "jobId": {  # 미스트리스
-                "jobId": "0c1b401bb09241570d364420b3ba3fd7",
-                "jobGrowId": "c9b492038ee3ca8d27d7004cf58d59f3"
+                "baseId": "0c1b401bb09241570d364420b3ba3fd7",
+                "advancedId": "c9b492038ee3ca8d27d7004cf58d59f3"
             },
             "skillId": {
                 "852f8ad797db4dca1405cb3e77198401": [13, 0.5],  # 죄를 고하는 자
@@ -374,8 +373,8 @@ class Settings(BaseSettings):
         },
         {
             "jobId": {  # 로그
-                "jobId": "ddc49e9ad1ff72a00b53c6cff5b1e920",
-                "jobGrowId": "37495b941da3b1661bc900e68ef3b2c6"
+                "baseId": "ddc49e9ad1ff72a00b53c6cff5b1e920",
+                "advancedId": "37495b941da3b1661bc900e68ef3b2c6"
             },
             "skillId": {
                 "de3fea2d65c597f4d55c70a02b97fc79": [4, 2],  # 문아크
@@ -383,8 +382,8 @@ class Settings(BaseSettings):
         },
         {
             "jobId": {  # 로그
-                "jobId": "ddc49e9ad1ff72a00b53c6cff5b1e920",
-                "jobGrowId": "c9b492038ee3ca8d27d7004cf58d59f3"
+                "baseId": "ddc49e9ad1ff72a00b53c6cff5b1e920",
+                "advancedId": "c9b492038ee3ca8d27d7004cf58d59f3"
             },
             "skillId": {
                 "7f80b887a09e88e2c4728c898bd73654": [10, 1.1],  # 암살자의 마음가짐
@@ -392,8 +391,8 @@ class Settings(BaseSettings):
         },
         {
             "jobId": {  # 팔라딘
-                "jobId": "0ee8fa5dc525c1a1f23fc6911e921e4a",
-                "jobGrowId": "6d459bc74ba73ee4fe5cdc4655400193"
+                "baseId": "0ee8fa5dc525c1a1f23fc6911e921e4a",
+                "advancedId": "6d459bc74ba73ee4fe5cdc4655400193"
             },
             "skillId": {
                 "9dc8438e4572d39243c97da31c113acc": [25.5, 0.5],  # 세라픽 페더
@@ -401,8 +400,8 @@ class Settings(BaseSettings):
         },
         {
             "jobId": {  # 뱅가드
-                "jobId": "3deb7be5f01953ac8b1ecaa1e25e0420",
-                "jobGrowId": "37495b941da3b1661bc900e68ef3b2c6"
+                "baseId": "3deb7be5f01953ac8b1ecaa1e25e0420",
+                "advancedId": "37495b941da3b1661bc900e68ef3b2c6"
             },
             "skillId": {
                 "de3fea2d65c597f4d55c70a02b97fc79": [11, 1],  # 마창 해방
@@ -410,8 +409,8 @@ class Settings(BaseSettings):
         },
         {
             "jobId": {  # 다크랜서
-                "jobId": "3deb7be5f01953ac8b1ecaa1e25e0420",
-                "jobGrowId": "c9b492038ee3ca8d27d7004cf58d59f3"
+                "baseId": "3deb7be5f01953ac8b1ecaa1e25e0420",
+                "advancedId": "c9b492038ee3ca8d27d7004cf58d59f3"
             },
             "skillId": {
                 "fc458e449ee00b01dbf88d09aae65462": [1, 1],  # 다크니스
@@ -419,8 +418,8 @@ class Settings(BaseSettings):
         },
         {
             "jobId": {  # 패스파인더
-                "jobId": "986c2b3d72ee0e4a0b7fcfbe786d4e02",
-                "jobGrowId": "c9b492038ee3ca8d27d7004cf58d59f3"
+                "baseId": "986c2b3d72ee0e4a0b7fcfbe786d4e02",
+                "advancedId": "c9b492038ee3ca8d27d7004cf58d59f3"
             },
             "skillId": {
                 "d53301bb328baf12a3ae482cc6a565dd": [10.5, 0.5],  # 코어 프렉시스
@@ -428,8 +427,8 @@ class Settings(BaseSettings):
         },
         {
             "jobId": {  # 크리에이터
-                "jobId": "b522a95d819a5559b775deb9a490e49a",
-                "jobGrowId": "0a49d9c8b5e1358efff324e5cb11d41e"
+                "baseId": "b522a95d819a5559b775deb9a490e49a",
+                "advancedId": "0a49d9c8b5e1358efff324e5cb11d41e"
             },
             "skillId": {
                 "2ff50c35efcf0f287c4c418c8454da48": [1, 1],  # 증폭
