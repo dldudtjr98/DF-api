@@ -6,4 +6,8 @@ python-multipart
 aiofiles
 boto3
 requests
-sqlalchemy
+httpx
+pydantic
+motor==2.3.0
+pymongo==3.11.1
+dnspython==2.0.0

@@ -2,7 +2,7 @@ FROM python:3.7
 
 ENV PYTHONUNBUFFERED 1
 
-EXPOSE 9000
+EXPOSE 8000
 
 RUN mkdir /config
 COPY config/app /config/
