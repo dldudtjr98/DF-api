@@ -4,6 +4,7 @@ from bson import ObjectId
 from pydantic.fields import Field
 
 from pydantic import BaseModel
+from pydantic.networks import AnyHttpUrl
 
 from modules import PyObjectId
 
@@ -35,11 +36,21 @@ class CharacterModel(BaseModel):
         json_encoders = {ObjectId: str}
 
 
-class CharacterResponseModel(BaseModel):
-    data: List[CharacterModel] = Field(...)
+class CharacterSearchModel(BaseModel):
+    serverId: str = Field(...)
+    characterId: str = Field(...)
+    characterName: str = Field(...)
+    level: int = Field(...)
+    jobId: str = Field(...)
+    jobGrowId: str = Field(...)
+    jobName: str = Field(...)
+    jobGrowName: str = Field(...)
+    critical: Optional[int] = Field(...)
+    charImg: AnyHttpUrl = Field(...)
 
-    class Config:
-        json_encoders = {ObjectId: str}
+
+class CharacterSearchResponseModel(BaseModel):
+    data: List[CharacterSearchModel] = Field(...)
 
 
 class Search(BaseModel):
