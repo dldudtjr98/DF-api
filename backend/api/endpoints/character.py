@@ -40,7 +40,12 @@ async def serch_user(request: Search):
         if char["level"] != settings.MAX_LEV:
             data["rows"].remove(char)
             continue
-        character = await char_base.find({"characterBasic.characterId": char["characterId"]}).sort("regTime", -1).to_list(100)
+        character = (
+            await char_base
+            .find({"characterBasic.characterId": char["characterId"]})
+            .sort("regTime", -1)
+            .to_list(100)
+        )
         if character:
             char["critical"] = character[0]["critical"]
         detail_char_url = f'servers/{char["serverId"]}/characters/{char["characterId"]}'
