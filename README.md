@@ -37,7 +37,7 @@
 GET /search HTTP/1.1
 Content-Type: application/json 
 {
-	"name": "zer.ostone"
+  "name": "zer.ostone"
 } 
 ```
 
