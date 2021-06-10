@@ -5,7 +5,7 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from fastapi import APIRouter, status
 
 from core.config import settings
-from ..models.character.schemas import Search, SearchDetail
+from ..models.character.schemas import CharacterModel, CharacterResponseModel, Search, SearchDetail
 from .modules.character import (
     calc_all_skill_critical, get_character_critical_skill, get_crit, search_basic_info,
     search_skill_enforce_info, search_skill_info
@@ -24,7 +24,7 @@ job = base_db['job']
 char_base = db['base']
 
 
-@router.get("/search", status_code=status.HTTP_200_OK)
+@router.get("/search", status_code=status.HTTP_200_OK, response_model=CharacterResponseModel)
 async def serch_user(request: Search):
     params = {
         "characterName": request.name,
@@ -53,7 +53,7 @@ async def serch_user(request: Search):
     return {"data": data["rows"]}
 
 
-@router.get("/search/detail", status_code=status.HTTP_200_OK)
+@router.get("/search/detail", status_code=status.HTTP_200_OK, response_model=CharacterModel)
 async def search_detail_user(request: SearchDetail):
     basic_data = await search_basic_info(request.serverId, request.characterId)
     skill_data = await search_skill_info(request.serverId, request.characterId)

@@ -1,5 +1,5 @@
 import datetime
-from typing import Optional
+from typing import List, Optional
 from bson import ObjectId
 from pydantic.fields import Field
 
@@ -30,6 +30,13 @@ class CharacterModel(BaseModel):
     characterBasic: CharacterBasicModel = Field(...)
     critical: float = Field(...)
     regTime: datetime.datetime = Field(...)
+
+    class Config:
+        json_encoders = {ObjectId: str}
+
+
+class CharacterResponseModel(BaseModel):
+    data: List[CharacterModel] = Field(...)
 
     class Config:
         json_encoders = {ObjectId: str}
